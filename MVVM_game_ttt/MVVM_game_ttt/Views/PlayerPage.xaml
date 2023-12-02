@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:modelviews="clr-namespace:MVVM_game_ttt.ModelViews" 
+             x:Class="MVVM_game_ttt.Views.PlayerPage" Title="Information about player">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="headerNewPlayer" Text="Enter new Player" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="30" TextColor="#7249d1"></Label>
+            <StackLayout x:Name="playerStack">
+                <Label Text="Name"  Padding="5, 0"/>
+                <Entry Text="{Binding Name}" FontSize="Medium" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Save" Command="{Binding ListViewModel.SavePlayerCommand}" CommandParameter="{Binding}" 
+                  BackgroundColor="#7249d1" TextColor="#f3f2f5"/>
+                <Button Text="Delete" Command="{Binding ListViewModel.DeletePlayerCommand}" CommandParameter="{Binding}" 
+                  BackgroundColor="#7249d1" TextColor="#f3f2f5"/>
+                <Button Text="Back" Command="{Binding Path=ListViewModel.BackCommand}" BackgroundColor="#7249d1" TextColor="#f3f2f5"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

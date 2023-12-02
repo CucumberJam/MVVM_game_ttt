@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:modelviews="clr-namespace:MVVM_game_ttt.ModelViews"
+             x:DataType="modelviews:CellViewModel"
+             x:Class="MVVM_game_ttt.Views.GamePage"
+             Title="Game Tic-Tac-Toe"
+>
+    <StackLayout>
+        <Label x:Name="PlayerName" Text="{Binding GameViewModel.Header}"
+               VerticalOptions="Center" 
+               HorizontalOptions="CenterAndExpand"
+               FontSize="30" TextColor="#7249d1" Margin="30, 20, 30, 20" />
+
+        <CollectionView ItemsSource="{Binding GameViewModel.Cells}"
+                ItemsLayout="VerticalGrid, 3">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="15, 5, 15, 5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout WidthRequest="{Binding GameViewModel.CellWidth}" >
+                            <Label Text="{Binding Name}" BackgroundColor="{Binding Color}" FontSize="25" HorizontalTextAlignment="Center" HeightRequest="90">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding IChangeFieldCommand}" CommandParameter="{Binding}" />
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Slider Value="140" ValueChanged="slider_ValueChanged"
+            MinimumTrackColor="DeepPink" MaximumTrackColor="Gray" ThumbColor="DeepPink" />
+        
+        <Label x:Name="result_game" Text="{Binding GameViewModel.Footer}"
+                VerticalOptions="Center" Margin="30, 50, 30, 0"
+                HorizontalOptions="CenterAndExpand"
+                    FontSize="30" TextColor="red" HorizontalTextAlignment="Center"/>
+        <Button Text="Restart Game" TextColor="White"  Command="{Binding Path=GameViewModel.RestartCommand}" BackgroundColor="#7249d1" Margin="50, 70, 50, 80" CornerRadius="15"/>
+    </StackLayout>
+</ContentPage>

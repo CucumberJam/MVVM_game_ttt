@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MVVM_game_ttt.Views.StartPage" Title="Game Tic-Tac-Toe">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="welcomeLabel" Text="Lets play!" HorizontalOptions="Center" VerticalTextAlignment="Center" FontSize="30" TextColor="#7249d1" Margin="0, 15, 0, 5"></Label>
+            <Button x:Name="btnPlay"  Text="Start!" FontSize="24" Margin="50, 20, 50, 0" BackgroundColor="#7249d1" TextColor="#f3f2f5" CornerRadius="15" Clicked="btnPlay_Clicked"></Button>
+ 
+            <StackLayout IsVisible="false" x:Name="container">
+                <ListView x:Name="playersList" ItemsSource="{Binding Players}"
+                  SelectedItem="{Binding SelectedPlayer, Mode=TwoWay}" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout>
+                                        <Label Text="{Binding Name}" FontSize="Medium" Padding="10, 10"/>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+                <Button Text="Add new" IsVisible="{Binding ShowBtnAddNewPlayer}" Command="{Binding CreatePlayerCommand}" BackgroundColor="#7249d1" TextColor="#f3f2f5" CornerRadius="15" Margin="50, 20, 50, 150"/>
+            </StackLayout>
+            
+            <StackLayout>
+                <ListView x:Name="winnersList" ItemsSource="{Binding Winners}">
+                    <ListView.Header>
+                        <StackLayout x:Name="winnersList_head" Orientation="Horizontal" IsVisible="{Binding ShowBtnWinners}">
+                            <Label Text="Список победителей" FontSize="25" HorizontalTextAlignment="Center"
+                           BackgroundColor="#c5cae9" HorizontalOptions="FillAndExpand" Margin="0,20,0,15"/>
+                        </StackLayout>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Player1_Name}" FontSize="20" HorizontalTextAlignment="Center" Padding="20,0,10,0"></Label>
+                                        <Label Text="{Binding Player2_Name}" FontSize="20" HorizontalTextAlignment="Center" Padding="10,0,10,0"></Label>
+                                        <Label Text="{Binding Player1_Result}" FontSize="20"></Label>
+                                        <Label Text=":" FontSize="20"></Label>
+                                        <Label Text="{Binding Player2_Result}" FontSize="20"></Label>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            
+            <Button Text="Start Game" IsVisible="{Binding ShowBtnStart}" Command="{Binding StartGameCommand}" FontSize="24" Margin="50,30, 50, 80" BackgroundColor="#7249d1" TextColor="#f3f2f5" CornerRadius="15" ></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
